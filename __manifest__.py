@@ -1,0 +1,22 @@
+{
+    "name" : "Brilliant Classes",
+    "version" : "15.0.1.0.0",
+    "license" : "LGPL-3",
+    "author" : "Taufik Sumara",
+    "website" : "https://tofik-007.github.io/Brilliant-Classes-1.1/",
+    "summary" : "Hassle Free Management of Tution Class",
+    "description" : "Function of this module to manage the record of students in Tution Classes",
+    'depends': ['mail'],
+    "data" : [
+              "security/ir.model.access.csv",
+              "views/student_menu.xml",
+              "views/student.xml",
+              "views/faculty.xml",
+              "views/new.xml",
+              "views/exam.xml",
+              ],
+    "installable" : True,
+    "category" : "Uncategorized",
+    "application" : True,
+    "auto_install" : False,
+}

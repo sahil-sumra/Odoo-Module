@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+student.access_student_student,access_student_student,student.model_student_student,base.group_user,1,1,1,1
+student.access_faculty_faculty,access_faculty_faculty,student.model_faculty_faculty,base.group_user,1,1,1,1
+student.access_new_new,access_new_new,student.model_new_new,base.group_user,1,1,1,1
+student.access_exam_exam,access_exam_exam,student.model_exam_exam,base.group_user,1,1,1,1
+
+
+
+
+

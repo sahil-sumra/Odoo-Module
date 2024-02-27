@@ -1,0 +1,136 @@
+<odoo>
+    <!-- tree view -->
+
+    <record id="new_tree_view" model="ir.ui.view">
+        <field name="name">new.tree</field>
+        <field name="model">new.new</field>
+        <field name="arch" type="xml">
+            <tree>
+                 <field name="name_id" decoration-it='1'/>
+                 <field name="age"/>
+                 <field name="tutor_id"/>
+                 <field name="id"/>
+                 <field name="contact"/>
+            </tree>
+        </field>
+    </record>string='Name'
+
+    <!-- form view -->
+    <record id="new_form_view" model="ir.ui.view">
+        <field name="name">new.form</field>
+        <field name="model">new.new</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>Brilliant Classes</h1>
+                        <group>
+                            <field name="name_id"/>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View Of Student's Profiles -->
+    <record id="new_new_kanban_view" model="ir.ui.view">
+        <field name="name">new.kanban</field>
+        <field name="model">new.new</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div class="oe_kanban_box oe_kanban_color_border">
+                                <div class="oe_kanban_box_header oe_kanban_color_bgdark oe_kanban_color_border oe_kanban_draghandle">
+                                    <table class="oe_kanban_table">
+                                        <tr>
+                                            <td class="oe_kanban_title1" align="left" valign="middle" style="padding-left:10px;">
+                                                <h4>
+                                                    <a>
+                                                        <field name="name_id" />
+                                                    </a>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="oe_kanban_box_content oe_kanban_color_bglight oe_kanban_box_show_onclick_trigger oe_kanban_color_border">
+                                    <table class="oe_kanban_table">
+                                        <tr width="300">
+                                            <td valign="top" width="64" align="left">
+                                                <a type="open">
+                                                    <img heigh="80" width="80" t-att-src="kanban_image('new.new', 'images', record.id.raw_value)" alt="image"/>
+                                                </a>
+                                            </td>
+                                            <td valign="top" align="left" style="padding-left:10px;">
+                                                <table>
+                                                    <tr>
+                                                        <td>Student ID :</td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="id"/>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Age : </td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                               <b>
+                                                                <field name="age" />
+                                                               </b>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tutor : </td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="tutor_id" />
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>contact : </td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="contact"/>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!--    action view-->
+    <record id="action_new_details" model="ir.actions.act_window">
+        <field name="name">Enrolled Student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">new.new</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new record, the first step of a new allocation!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="new_data"
+              name="Registery"
+              parent="student_menu_root"/>
+
+    <menuitem id="new_menu"
+              name="Enrolled Students"
+              action="action_new_details"
+              parent="new_data"/>
+</odoo>
+

@@ -1,0 +1,85 @@
+<odoo>
+    <!-- tree view -->
+    <record id="faculty_tree_view" model="ir.ui.view">
+        <field name="name">faculty.tree</field>
+        <field name="model">faculty.faculty</field>
+        <field name="arch" type="xml">
+            <tree>
+                 <field name="faculty_name" decoration-bf='1'/>
+                 <field name="faculty_id" decoration-it='1'/>
+                 <field name="gender"/>
+                 <field name="mobile" decoration-success='1'/>
+                 <field name="mail" decoration-warning='1'/>
+            </tree>
+        </field>
+    </record>
+    <!-- form view -->
+    <record id="faculty_form_view" model="ir.ui.view">
+        <field name="name">faculty.form</field>
+        <field name="model">faculty.faculty</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1 name="faculty_name" class="oe_inline"></h1>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <notebook>
+                        <page name="faculty_details" string="Personal Info">
+                        <group>
+                            <group>
+                                <field name="faculty_name"/>
+                                <field name="faculty_id"/>
+                                <field name="gender"/>
+                            </group>
+                            <group>    
+                                <field name="mobile"/>
+                                <field name="mail"/>
+                                <field name="rate" widget="priority"/>
+                            </group>
+                        </group>
+                        </page>
+                        <page name="page_details" string="Description">
+                            <field name="description" placeholder="Enter Description Here" help="Provide basic description about faculty"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- search view -->
+    <record id="faculty_search_view" model="ir.ui.view">
+        <field name="name">faculty.search</field>
+        <field name="model">faculty.faculty</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="faculty_name" filter_domain="['|', ('faculty_name', 'ilike', self), ('faculty_id', 'ilike', self)]"/>
+                <field name="faculty_id"/>
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
+                <separator/>
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
+            </search>
+        </field>
+    </record>
+    <!--    action view-->
+    <record id="action_faculty_details" model="ir.actions.act_window">
+        <field name="name">faculty Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">faculty.faculty</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a record of Faculty!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="faculty_data"
+              name="Faculty"
+              parent="student_menu_root"/>
+
+    <menuitem id="faculty_menu"
+              name="Faculty Details"
+              action="action_faculty_details"
+              parent="faculty_data"/>
+</odoo>
+

@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem id="student_menu_root"
+            name="Brilliant Classes"
+            web_icon="student,static/description/icon.png"
+            />
+
+
+</odoo>

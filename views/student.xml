@@ -1,0 +1,151 @@
+<odoo>
+    <!-- tree view -->
+
+    <record id="student_tree_view" model="ir.ui.view">
+        <field name="name">student.tree</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_name" decoration-bf='1' />
+                <field name="student_id" decoration-it='1' />
+                <field name="gender" decoration-danger='1' />
+                <field name="tutor_id" />
+                <field name="star" widget="priority" decoration-success='1' />
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view -->
+
+    <record id="student_form_view" model="ir.ui.view">
+        <field name="name">student.form</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" clickable='1' />
+                </header>
+                <sheet>
+                    <h1>Brilliant Classes</h1>
+                    <field name="image" widget="image" class="oe_avatar" />
+                    <notebook>
+                        <page name="student_details" string="Personal Info">
+                            <group>
+                                <group>
+                                    <field name="student_name" />
+                                    <field name="gender" help="select suitable option from given" />
+                                    <field name="dob" />
+                                    <field name="age" />
+                                    <field name="city" />
+                                </group>
+                                <group>
+                                    <field name="height"
+                                        attrs="{'invisible':[('gender', '=', 'other')]}" />
+                                    <field name="weight"
+                                        attrs="{'invisible':[('gender', '=', 'other')]}" />
+                                    <field name="mobile" />
+                                    <field name="mail" />
+                                    <field name="address" />
+                                </group>
+                            </group>
+
+                        </page>
+                        <page name="education" string="Education Details">
+                            <group>
+                                <group>
+                                    <field name="student_id" />
+                                    <field name="std" />
+                                    <field name="tutor_id" />
+                                    <field name="mob" />
+                                    <field name="rating" widget="priority" />
+                                    <field name="admission" />
+                                    <field name="data" />
+                                </group>
+                                <group>
+                                    <field name="fee" />
+                                    <field name="marks" />
+                                    <field name="star" widget="priority" />
+                                    <field name="scholar" widget="toggle_button" />
+                                    <field name="ref"
+                                        attrs="{'readonly': [('scholar', '!=', True)]}" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="emergency_details" string="Emergency Info">
+                            <group>
+                                <field name="contact" />
+                                <field name="allergy" />
+                                <field name="blood_grp" />
+                            </group>
+                        </page>
+                        <page name="page_details" string="Remarks">
+                            <field name="description" placeholder="Enter Description Here"
+                                help="Provide basic description about student" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- search view -->
+
+    <record id="student_search_view" model="ir.ui.view">
+        <field name="name">student.search</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="student_name"
+                    filter_domain="['|', ('student_name', 'ilike', self), ('student_id', 'ilike', self)]" />
+                <field name="student_id" />
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]" />
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]" />
+                <group expand="0" string="Group by">
+                    <filter name="group_by_gender" string="Gender" context="{'group_by': 'gender'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- graph view -->
+
+    <record model="ir.ui.view" id="student_graph_view">
+        <field name="name">student.graph</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="student_name" string="Student" />
+                <field name="student_id" string="ID" />
+                <field name="marks" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- action view-->
+
+    <record id="action_student_details" model="ir.actions.act_window">
+        <field name="name">Student Registery</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">student.student</field>
+        <field name="view_mode">tree,form,graph,search</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a record of student!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="student_data"
+        name="Admission"
+        parent="student_menu_root" />
+
+    <menuitem id="student_menu"
+        name="Student Register"
+        action="action_student_details"
+        parent="student_data" />
+</odoo>
